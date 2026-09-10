@@ -1,0 +1,1472 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Brandovise CRM Tool</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: #f0f2f5;
+      color: #1a1a2e;
+      min-height: 100vh;
+    }
+
+    header {
+      background: #4f46e5;
+      color: white;
+      padding: 1rem 2rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      justify-content: center;
+      text-align: center;
+    }
+
+    header h1 {
+      font-size: 1.75rem;
+      font-weight: 700;
+    }
+
+    header span {
+      font-size: 1.0rem;
+      opacity: 0.6;
+    }
+
+    nav {
+      background: white;
+      border-bottom: 1px solid #e5e7eb;
+      padding: 0 2rem;
+      display: flex;
+      gap: 0;
+    }
+
+    nav a {
+      padding: 0.9rem 1.25rem;
+      text-decoration: none;
+      font-size: 0.9rem;
+      color: #6b7280;
+      border-bottom: 3px solid transparent;
+      cursor: pointer;
+      width: 50vw;
+      text-align: center;
+    }
+
+    nav a.active,
+    nav a:hover {
+      color: #4f46e5;
+      border-bottom-color: #4f46e5;
+    }
+
+    main {
+      padding: 2rem;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .page {
+      display: none;
+    }
+
+    .page.active {
+      display: block;
+    }
+
+    .card {
+      background: white;
+      border-radius: 10px;
+      padding: 1.5rem;
+      box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+      margin-bottom: 1.5rem;
+    }
+
+    .card h2 {
+      font-size: 1.05rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+
+    .card p {
+      font-size: 0.9rem;
+      color: #6b7280;
+      margin-bottom: 1rem;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 0.6rem 1.4rem;
+      border: none;
+      border-radius: 6px;
+      font-size: 0.9rem;
+      cursor: pointer;
+      font-weight: 500;
+      transition: opacity 0.15s;
+    }
+
+    .btn:disabled {
+      opacity: 0.45;
+      cursor: not-allowed;
+    }
+
+    .btn-primary {
+      background: #4f46e5;
+      color: white;
+    }
+
+    .btn-success {
+      background: #10b981;
+      color: white;
+    }
+
+    .btn-secondary {
+      background: #e5e7eb;
+      color: #374151;
+    }
+
+    .btn:not(:disabled):hover {
+      opacity: 0.88;
+    }
+
+    .summary-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 1rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .summary-box {
+      background: #f9fafb;
+      border: 1px solid #e5e7eb;
+      border-radius: 8px;
+      padding: 1rem;
+      text-align: center;
+    }
+
+    .summary-box .num {
+      font-size: 2rem;
+      font-weight: 700;
+      color: #4f46e5;
+    }
+
+    .summary-box .lbl {
+      font-size: 0.8rem;
+      color: #6b7280;
+      margin-top: 0.2rem;
+    }
+
+    .issues-list {
+      list-style: none;
+    }
+
+    .issue-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      padding: 0.6rem 0;
+      border-bottom: 1px solid #f3f4f6;
+      font-size: 0.85rem;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 99px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+
+    .badge-error {
+      background: #fee2e2;
+      color: #dc2626;
+    }
+
+    .badge-warning {
+      background: #fef3c7;
+      color: #d97706;
+    }
+
+    .badge-info {
+      background: #dbeafe;
+      color: #2563eb;
+    }
+
+    .result-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.82rem;
+    }
+
+    .result-table th {
+      text-align: left;
+      padding: 0.45rem 0.6rem;
+      background: #f9fafb;
+      border-bottom: 2px solid #e5e7eb;
+      white-space: nowrap;
+    }
+
+    .result-table td {
+      padding: 0.45rem 0.6rem;
+      border-bottom: 1px solid #f3f4f6;
+      vertical-align: middle;
+    }
+
+    #import-status {
+      font-size: 0.9rem;
+      margin-top: 1rem;
+      padding: 0.75rem 1rem;
+      border-radius: 6px;
+      display: none;
+    }
+
+    .status-info {
+      background: #eff6ff;
+      color: #1d4ed8;
+    }
+
+    .status-success {
+      background: #ecfdf5;
+      color: #065f46;
+    }
+
+    .status-error {
+      background: #fef2f2;
+      color: #991b1b;
+    }
+
+    .urgency-critical td {
+      background: #fff1f1;
+    }
+
+    .urgency-high td {
+      background: #fff8ed;
+    }
+
+    .urgency-medium td {
+      background: #fefce8;
+    }
+
+    .urgency-expired td {
+      background: #fde8e8;
+      text-decoration: line-through;
+      color: #9ca3af;
+    }
+
+    .urgency-cancelled td {
+      color: #9ca3af;
+    }
+
+    .days-badge {
+      display: inline-block;
+      padding: 0.2rem 0.55rem;
+      border-radius: 99px;
+      font-size: 0.78rem;
+      font-weight: 600;
+    }
+
+    .urgency-critical .days-badge {
+      background: #fee2e2;
+      color: #dc2626;
+    }
+
+    .urgency-high .days-badge {
+      background: #fde68a;
+      color: #92400e;
+    }
+
+    .urgency-medium .days-badge {
+      background: #fef9c3;
+      color: #854d0e;
+    }
+
+    .urgency-low .days-badge {
+      background: #d1fae5;
+      color: #065f46;
+    }
+
+    .urgency-expired .days-badge {
+      background: #fca5a5;
+      color: #7f1d1d;
+    }
+
+    .file-row {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.5rem 0.75rem;
+      border: 1px solid #e5e7eb;
+      border-radius: 6px;
+      margin-bottom: 0.5rem;
+      font-size: 0.85rem;
+    }
+
+    .file-row .file-name {
+      flex: 1;
+      font-weight: 500;
+      overflow-wrap: anywhere;
+    }
+
+    .file-row .file-size {
+      color: #6b7280;
+      width: 64px;
+      text-align: right;
+    }
+
+    .file-row select {
+      padding: 0.35rem 0.5rem;
+      border: 1px solid #e5e7eb;
+      border-radius: 6px;
+      font-size: 0.82rem;
+    }
+
+    .file-row .btn-remove {
+      background: none;
+      border: none;
+      color: #9ca3af;
+      cursor: pointer;
+      font-size: 1rem;
+      line-height: 1;
+      padding: 0 0.25rem;
+    }
+
+    .file-row .btn-remove:hover {
+      color: #dc2626;
+    }
+
+    .dup-item {
+      border: 1px solid #e5e7eb;
+      border-radius: 8px;
+      margin-bottom: 0.75rem;
+      overflow: hidden;
+    }
+
+    .dup-header {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.75rem 1rem;
+      cursor: pointer;
+      background: #f9fafb;
+    }
+
+    .dup-header:hover {
+      background: #f3f4f6;
+    }
+
+    .dup-title {
+      font-size: 0.88rem;
+      flex: 1;
+    }
+
+    .dup-chevron {
+      color: #9ca3af;
+    }
+
+    .dup-body {
+      padding: 1rem;
+      border-top: 1px solid #e5e7eb;
+    }
+
+    .dup-columns {
+      display: grid;
+      grid-template-columns: 1fr 1.4fr;
+      gap: 1.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .dup-columns h4 {
+      font-size: 0.85rem;
+      margin-bottom: 0.5rem;
+      color: #374151;
+    }
+
+    .dup-common-list {
+      list-style: none;
+      font-size: 0.83rem;
+      color: #4b5563;
+    }
+
+    .dup-common-list li {
+      padding: 0.2rem 0;
+    }
+
+    .diff-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.83rem;
+    }
+
+    .diff-table th,
+    .diff-table td {
+      text-align: left;
+      padding: 0.4rem 0.6rem;
+      border-bottom: 1px solid #f3f4f6;
+    }
+
+    .diff-table th {
+      color: #6b7280;
+      font-weight: 600;
+    }
+
+    .quick-actions {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+
+    .qa-btn {
+      padding: 0.45rem 0.9rem;
+      border: 1px solid #d1d5db;
+      border-radius: 6px;
+      background: white;
+      font-size: 0.82rem;
+      cursor: pointer;
+      color: #374151;
+    }
+
+    .qa-btn:hover {
+      border-color: #4f46e5;
+      color: #4f46e5;
+    }
+
+    .qa-btn-active {
+      background: #4f46e5;
+      border-color: #4f46e5;
+      color: white;
+    }
+
+    .hint-text {
+      font-size: 0.8rem;
+      color: #6b7280;
+      margin-top: 0.5rem;
+    }
+
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.4);
+      align-items: center;
+      justify-content: center;
+      z-index: 100;
+    }
+
+    .modal-overlay.open {
+      display: flex;
+    }
+
+    .modal-box {
+      background: white;
+      border-radius: 10px;
+      padding: 1.5rem;
+      width: 100%;
+      max-width: 480px;
+      max-height: 90vh;
+      overflow-y: auto;
+    }
+
+    .modal-box h2 {
+      margin-bottom: 1rem;
+    }
+
+    .form-row {
+      margin-bottom: 0.9rem;
+    }
+
+    .form-row label {
+      display: block;
+      font-size: 0.8rem;
+      color: #6b7280;
+      margin-bottom: 0.3rem;
+    }
+
+    .form-row input,
+    .form-row select {
+      width: 100%;
+      padding: 0.5rem 0.65rem;
+      border: 1px solid #e5e7eb;
+      border-radius: 6px;
+      font-size: 0.875rem;
+    }
+
+    .modal-actions {
+      display: flex;
+      gap: 0.6rem;
+      justify-content: flex-end;
+      margin-top: 1.2rem;
+    }
+
+    #edit-error {
+      color: #dc2626;
+      font-size: 0.85rem;
+      margin-top: 0.6rem;
+      display: none;
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div>
+      <h1>Brandovise CRM Tool</h1>
+      <span>Contract Management for German Insurance and Finance Brokers</span>
+    </div>
+  </header>
+
+  <nav>
+    <a class="active" onclick="showPage('import')" id="nav-import">Import Data</a>
+    <a onclick="showPage('console'); loadContracts()" id="nav-console">Contract Console</a>
+  </nav>
+
+  <main>
+    <div class="page active" id="page-import">
+
+      <div class="card" id="step-preview">
+        <h2>Step 1 — Upload & Preview</h2>
+        <p>Upload your CSV files, check for issues, and preview what will be imported into Zoho CRM.</p>
+
+        <input type="file" id="file-input" accept=".csv" multiple style="display:none" onchange="onFilesChosen(event)">
+        <button class="btn btn-secondary" onclick="document.getElementById('file-input').click()">Upload here</button>
+        <span class="hint-text" style="display:inline;">Size limit: 10 MB</span>
+
+        <div id="file-list" style="margin-top:1rem;"></div>
+
+        <button class="btn btn-primary" id="btn-preview" onclick="runPreview()" disabled style="margin-top:0.5rem;">Load
+          &amp; Preview Data</button>
+        <div class="hint-text" id="preview-hint"></div>
+      </div>
+
+      <div id="preview-results" style="display:none;">
+
+        <div class="card">
+          <h2>Import Summary</h2>
+          <div class="summary-grid" id="summary-grid"></div>
+        </div>
+
+        <div class="card">
+          <h2>Issue Details</h2>
+          <ul class="issues-list" id="issues-list"></ul>
+        </div>
+
+        <div class="card" id="duplicates-card" style="display:none;">
+          <h2>Potential Duplicates</h2>
+          <p>These records share most fields but have different unique IDs. Review each pair and choose how to handle
+            it.</p>
+          <div id="duplicates-list"></div>
+        </div>
+
+        <div class="card" id="zoho-conflicts-card" style="display:none;">
+          <h2>Conflicts with Existing Zoho Records</h2>
+          <p>These emails already exist on another Zoho record. Choose to merge into that record, or omit the row
+            and fix it in your CSV.</p>
+          <div id="zoho-conflicts-list"></div>
+        </div>
+
+        <div class="card" id="finalized-preview-card" style="display:none;">
+          <h2>Finalized Import Preview</h2>
+          <div class="summary-grid" id="finalized-summary-grid"></div>
+          <div class="hint-text" id="finalized-hint"></div>
+        </div>
+
+        <div class="card">
+          <h2>Step 2 — Confirm Import</h2>
+          <p>Click below to write the records to Zoho CRM. Running this again will update existing records rather than
+            create duplicates.</p>
+          <button class="btn btn-success" id="btn-confirm" onclick="runConfirm()" disabled>Confirm &amp; Import into
+            Zoho</button>
+          <div class="hint-text" id="confirm-hint"></div>
+          <div id="import-status"></div>
+        </div>
+      </div>
+
+      <div id="result-summary" style="display:none;">
+        <div class="card">
+          <h2>Import Complete</h2>
+          <table class="result-table">
+            <thead>
+              <tr>
+                <th>Type</th>
+                <th>Created</th>
+                <th>Updated</th>
+                <th>Failed</th>
+              </tr>
+            </thead>
+            <tbody id="result-tbody"></tbody>
+          </table>
+          <div id="failed-list" style="margin-top:1rem;"></div>
+          <button class="btn btn-secondary" style="margin-top:1rem;" onclick="resetImport()">Run Again</button>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="page" id="page-console">
+
+      <div class="card" style="margin-bottom:1rem;">
+        <div style="display:flex; gap:1rem; flex-wrap:wrap; align-items:flex-end;">
+          <div>
+            <label style="font-size:0.8rem; color:#6b7280; display:block; margin-bottom:0.3rem;">Broker</label>
+            <select id="filter-broker" onchange="applyFilters()"
+              style="padding:0.45rem 0.75rem; border:1px solid #e5e7eb; border-radius:6px; font-size:0.875rem;">
+              <option value="">All Brokers</option>
+            </select>
+          </div>
+          <div>
+            <label style="font-size:0.8rem; color:#6b7280; display:block; margin-bottom:0.3rem;">Expiry Window</label>
+            <select id="filter-expiry" onchange="applyFilters()"
+              style="padding:0.45rem 0.75rem; border:1px solid #e5e7eb; border-radius:6px; font-size:0.875rem;">
+              <option value="">All</option>
+              <option value="30">Next 30 days</option>
+              <option value="90">Next 90 days</option>
+              <option value="180">Next 180 days</option>
+            </select>
+          </div>
+
+          <div>
+            <label style="font-size:0.8rem; color:#6b7280; display:block; margin-bottom:0.3rem;">Rows per page</label>
+            <select id="filter-pagesize" onchange="onPageSizeChange()"
+              style="padding:0.45rem 0.75rem; border:1px solid #e5e7eb; border-radius:6px; font-size:0.875rem;">
+              <option value="10" selected>10</option>
+              <option value="20">20</option>
+              <option value="50">50</option>
+              <option value="100">100</option>
+            </select>
+          </div>
+          <button class="btn btn-secondary" onclick="loadContracts()" style="padding:0.45rem 1rem;">↺ Refresh</button>
+          <button class="btn btn-success" id="btn-bulk" onclick="bulkFollowup()"
+            style="padding:0.45rem 1rem; white-space:nowrap;">⚡ Bulk Renewal Follow Up</button>
+          <span id="console-count"
+            style="font-size:0.85rem; color:#6b7280; margin-left:auto; align-self:center;"></span>
+        </div>
+      </div>
+
+      <div id="bulk-status"
+        style="display:none; margin-bottom:1rem; padding:0.75rem 1rem; border-radius:6px; font-size:0.9rem;"></div>
+
+      <div class="card" style="padding:0; overflow:hidden;">
+        <div id="console-loading" style="padding:2rem; text-align:center; color:#6b7280;">Loading contracts…</div>
+        <div id="console-error" style="display:none; padding:1rem; color:#dc2626; font-size:0.9rem;"></div>
+        <div style="overflow-x:auto;">
+          <table class="result-table" id="console-table" style="display:none;">
+            <thead>
+              <tr>
+                <th>Contract #</th>
+                <th>Customer Name</th>
+                <th>Contact Info</th>
+                <th>Broker</th>
+                <th>Expiry Date</th>
+                <th>Days Left</th>
+                <th>Status</th>
+                <th>Follow Up</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody id="console-tbody"></tbody>
+          </table>
+        </div>
+
+        <div id="pagination-controls"
+          style="display:none; align-items:center; justify-content:space-between; padding:0.85rem 1rem; border-top:1px solid #e5e7eb; font-size:0.85rem;">
+          <span id="pagination-summary" style="color:#6b7280;"></span>
+          <div style="display:flex; gap:0.5rem; align-items:center;">
+            <button class="btn btn-secondary" id="btn-prev-page" style="padding:0.35rem 0.85rem;"
+              onclick="goToPage(currentPage - 1)">‹ Prev</button>
+            <span id="pagination-pages" style="color:#374151;"></span>
+            <button class="btn btn-secondary" id="btn-next-page" style="padding:0.35rem 0.85rem;"
+              onclick="goToPage(currentPage + 1)">Next ›</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </main>
+
+  <script>
+    function showPage(name) {
+      document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+      document.querySelectorAll('nav a').forEach(a => a.classList.remove('active'));
+      document.getElementById('page-' + name).classList.add('active');
+      document.getElementById('nav-' + name).classList.add('active');
+    }
+
+    const MAX_FILES = 10;
+    const MAX_FILE_SIZE = 10 * 1024 * 1024;
+
+    let uploadedFiles = [];
+    let previewData = null;
+    let resolutions = {};
+
+    function onFilesChosen(event) {
+      const newFiles = Array.from(event.target.files);
+      for (const f of newFiles) {
+        if (uploadedFiles.length >= MAX_FILES) {
+          alert(`You can upload at most ${MAX_FILES} files.`);
+          break;
+        }
+        if (f.size > MAX_FILE_SIZE) {
+          alert(`"${f.name}" exceeds the 10 MB limit and was skipped.`);
+          continue;
+        }
+        uploadedFiles.push({ file: f, type: '' });
+      }
+      event.target.value = '';
+      renderFileList();
+      updatePreviewButtonState();
+    }
+
+    function removeFile(idx) {
+      uploadedFiles.splice(idx, 1);
+      renderFileList();
+      updatePreviewButtonState();
+    }
+
+    function setFileType(idx, type) {
+      uploadedFiles[idx].type = type;
+      updatePreviewButtonState();
+    }
+
+    function renderFileList() {
+      const container = document.getElementById('file-list');
+      container.innerHTML = uploadedFiles.map((entry, idx) => `
+        <div class="file-row">
+          <span class="file-name">${entry.file.name}</span>
+          <span class="file-size">${(entry.file.size / 1024).toFixed(0)} KB</span>
+          <select onchange="setFileType(${idx}, this.value)">
+            <option value="">Select type…</option>
+            <option value="contacts" ${entry.type === 'contacts' ? 'selected' : ''}>Contacts</option>
+            <option value="contracts" ${entry.type === 'contracts' ? 'selected' : ''}>Contracts</option>
+          </select>
+          <button class="btn-remove" onclick="removeFile(${idx})" title="Remove">✕</button>
+        </div>
+      `).join('');
+    }
+
+    function updatePreviewButtonState() {
+      const btn = document.getElementById('btn-preview');
+      const hint = document.getElementById('preview-hint');
+      const ready = uploadedFiles.length > 0 && uploadedFiles.every(e => e.type);
+      btn.disabled = !ready;
+      if (uploadedFiles.length === 0) {
+        hint.textContent = 'Add at least one file and set its type to continue.';
+      } else if (!ready) {
+        hint.textContent = 'Select a type (Contacts/Contracts) for every uploaded file.';
+      } else {
+        hint.textContent = '';
+      }
+    }
+
+    async function runPreview() {
+      const btn = document.getElementById('btn-preview');
+      btn.disabled = true;
+      btn.textContent = 'Loading…';
+
+      const formData = new FormData();
+      uploadedFiles.forEach(entry => {
+        const field = entry.type === 'contacts' ? 'contactsFiles' : 'contractsFiles';
+        formData.append(field, entry.file, entry.file.name);
+      });
+
+      try {
+        const res = await fetch('/api/import/preview', { method: 'POST', body: formData });
+        const json = await res.json();
+        if (!json.ok) throw new Error(json.error);
+
+        previewData = json;
+        resolutions = {};
+
+        renderSummaryCards(json);
+        renderIssues(json.issues);
+        renderDuplicates(json.duplicates);
+        renderZohoConflicts(json.zohoConflicts);
+        updateFinalizedPreview();
+        updateConfirmButtonState();
+
+        document.getElementById('preview-results').style.display = 'block';
+        btn.textContent = 'Load & Preview Data';
+        btn.disabled = false;
+      } catch (e) {
+        alert('Preview failed: ' + e.message);
+        btn.textContent = 'Load & Preview Data';
+        updatePreviewButtonState();
+      }
+    }
+
+    function renderSummaryCards(json) {
+      const grid = document.getElementById('summary-grid');
+      const fileBoxes = json.fileSummaries.map(fs => `
+        <div class="summary-box">
+          <div class="num">${fs.rowCount}</div>
+          <div class="lbl">${fs.module === 'contacts' ? 'Contacts' : 'Contracts'} — ${fs.source}</div>
+        </div>
+      `).join('');
+      const issuesBox = `
+        <div class="summary-box">
+          <div class="num">${json.summary.issueCount}</div>
+          <div class="lbl">Issues found</div>
+        </div>
+      `;
+      grid.innerHTML = fileBoxes + issuesBox;
+    }
+
+    function renderIssues(issues) {
+      const ul = document.getElementById('issues-list');
+      ul.innerHTML = '';
+      if (issues.length === 0) {
+        ul.innerHTML = '<li style="color:#6b7280; padding:0.5rem 0;">No issues found — data looks clean.</li>';
+        return;
+      }
+      issues.forEach(issue => {
+        const li = document.createElement('li');
+        li.className = 'issue-item';
+        li.innerHTML = `
+          <span class="badge badge-${issue.severity}">${issue.severity}</span>
+          <span><strong>Row ${issue.row}</strong> (${issue.source}) — ${issue.message}</span>
+        `;
+        ul.appendChild(li);
+      });
+    }
+
+    function renderDuplicates(duplicates) {
+      const card = document.getElementById('duplicates-card');
+      const list = document.getElementById('duplicates-list');
+
+      if (!duplicates || duplicates.length === 0) {
+        card.style.display = 'none';
+        list.innerHTML = '';
+        return;
+      }
+
+      card.style.display = 'block';
+      list.innerHTML = duplicates.map(group => renderDupItem(group)).join('');
+    }
+
+    function renderDupItem(group) {
+      const moduleLabel = group.module === 'contacts' ? 'Contact' : 'Contract';
+      const idA = group.recordA.id;
+      const idB = group.recordB.id;
+      const currentAction = resolutions[group.id];
+      const resolved = !!currentAction;
+
+      const actionLabels = { omitA: `Omit ${idA}`, omitB: `Omit ${idB}`, skipBoth: 'Skip Both', importBoth: 'Import Both' };
+
+      const commonHtml = group.common.length
+        ? group.common.map(c => `<li><strong>${c.field}:</strong> ${c.value || '—'}</li>`).join('')
+        : '<li style="color:#9ca3af;">No shared non-empty fields</li>';
+
+      const diffRows = group.different.map(d => `
+        <tr>
+          <td>${d.field}</td>
+          <td>${d.valueA || '—'}</td>
+          <td>${d.valueB || '—'}</td>
+        </tr>
+      `).join('');
+
+      const actionsHtml = ['omitA', 'omitB', 'skipBoth', 'importBoth'].map(action => `
+        <button class="qa-btn ${currentAction === action ? 'qa-btn-active' : ''}"
+          onclick="resolveDup('${group.id}', '${action}')">
+          ${actionLabels[action]}
+        </button>
+      `).join('');
+
+      return `
+        <div class="dup-item">
+          <div class="dup-header" onclick="toggleDup('${group.id}')">
+            <span class="badge ${resolved ? 'badge-info' : 'badge-warning'}">${resolved ? actionLabels[currentAction] : 'Needs review'}</span>
+            <span class="dup-title">${moduleLabel} — possible duplicate: <strong>${idA}</strong> ↔ <strong>${idB}</strong></span>
+            <span class="dup-chevron" id="chevron-${group.id}">▾</span>
+          </div>
+          <div class="dup-body" id="body-${group.id}" style="display:none;">
+            <div class="dup-columns">
+              <div>
+                <h4>Common columns</h4>
+                <ul class="dup-common-list">${commonHtml}</ul>
+              </div>
+              <div>
+                <h4>Different columns</h4>
+                <table class="diff-table">
+                  <thead><tr><th>Field</th><th>${idA}</th><th>${idB}</th></tr></thead>
+                  <tbody>${diffRows}</tbody>
+                </table>
+              </div>
+            </div>
+            <div class="quick-actions">${actionsHtml}</div>
+          </div>
+        </div>
+      `;
+    }
+
+    function toggleDup(id) {
+      const body = document.getElementById(`body-${id}`);
+      const chevron = document.getElementById(`chevron-${id}`);
+      const isOpen = body.style.display === 'block';
+      body.style.display = isOpen ? 'none' : 'block';
+      chevron.textContent = isOpen ? '▾' : '▴';
+    }
+
+    function resolveDup(id, action) {
+      resolutions[id] = action;
+      renderDuplicates(previewData.duplicates);
+
+      const body = document.getElementById(`body-${id}`);
+      const chevron = document.getElementById(`chevron-${id}`);
+      if (body) body.style.display = 'block';
+      if (chevron) chevron.textContent = '▴';
+
+      updateFinalizedPreview();
+      updateConfirmButtonState();
+    }
+
+    function renderZohoConflicts(conflicts) {
+      const card = document.getElementById('zoho-conflicts-card');
+      const list = document.getElementById('zoho-conflicts-list');
+      if (!conflicts || conflicts.length === 0) { card.style.display = 'none'; list.innerHTML = ''; return; }
+      card.style.display = 'block';
+      list.innerHTML = conflicts.map(c => {
+        const current = resolutions[c.id];
+        return `
+          <div class="dup-item">
+            <div class="dup-header" onclick="toggleDup('${c.id}')">
+              <span class="badge ${current ? 'badge-info' : 'badge-warning'}">${current ? (current === 'merge' ? 'Will merge' : 'Omitted') : 'Needs review'}</span>
+              <span class="dup-title">Contact <strong>${c.kundennummer}</strong> — email <strong>${c.email}</strong> already exists in Zoho</span>
+              <span class="dup-chevron" id="chevron-${c.id}">▾</span>
+            </div>
+            <div class="dup-body" id="body-${c.id}" style="display:none;">
+              <p class="hint-text" style="margin-bottom:1rem;">Importing this row will update the existing Zoho contact (ID ${c.existingZohoId}) unless you omit it.</p>
+              <div class="quick-actions">
+                <button class="qa-btn ${current === 'merge' ? 'qa-btn-active' : ''}" onclick="resolveConflict('${c.id}', 'merge')">Merge into Existing Record</button>
+                <button class="qa-btn ${current === 'omit' ? 'qa-btn-active' : ''}" onclick="resolveConflict('${c.id}', 'omit')">Omit This Row</button>
+              </div>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function resolveConflict(id, action) {
+      resolutions[id] = action;
+      renderZohoConflicts(previewData.zohoConflicts);
+      const body = document.getElementById(`body-${id}`);
+      if (body) body.style.display = 'block';
+      updateFinalizedPreview();
+      updateConfirmButtonState();
+    }
+
+    function updateFinalizedPreview() {
+      const card = document.getElementById('finalized-preview-card');
+      const resolvedCount = Object.keys(resolutions).length;
+
+      if (resolvedCount === 0) {
+        card.style.display = 'none';
+        return;
+      }
+      card.style.display = 'block';
+
+      const excludeContactIds = new Set();
+      const excludeContractIds = new Set();
+
+      previewData.duplicates.forEach(group => {
+        const action = resolutions[group.id];
+        if (!action) return;
+        const idA = group.recordA.id;
+        const idB = group.recordB.id;
+        const targetSet = group.module === 'contacts' ? excludeContactIds : excludeContractIds;
+        if (action === 'omitA') targetSet.add(idA);
+        else if (action === 'omitB') targetSet.add(idB);
+        else if (action === 'skipBoth') { targetSet.add(idA); targetSet.add(idB); }
+      });
+
+      (previewData.zohoConflicts || []).forEach(conflict => {
+        const action = resolutions[conflict.id];
+        if (action === 'omit') {
+          excludeContactIds.add(conflict.kundennummer);
+        }
+      });
+
+      const finalContacts = previewData.counts.contacts - excludeContactIds.size;
+      const finalContracts = previewData.counts.contracts - excludeContractIds.size;
+
+      document.getElementById('finalized-summary-grid').innerHTML = `
+        <div class="summary-box">
+          <div class="num">${finalContacts}</div>
+          <div class="lbl">Contacts to import</div>
+        </div>
+        <div class="summary-box">
+          <div class="num">${finalContracts}</div>
+          <div class="lbl">Contracts to import</div>
+        </div>
+      `;
+
+      const totalFlagged = previewData.duplicates.length + (previewData.zohoConflicts || []).length;
+      const remaining = totalFlagged - resolvedCount;
+      document.getElementById('finalized-hint').textContent = remaining > 0
+        ? `${remaining} of ${totalFlagged} potential duplicate(s) still need a decision.`
+        : `All ${totalFlagged} potential duplicate(s) resolved.`;
+    }
+
+    function updateConfirmButtonState() {
+      const btn = document.getElementById('btn-confirm');
+      const hint = document.getElementById('confirm-hint');
+      if (!previewData) { btn.disabled = true; hint.textContent = ''; return; }
+
+      const total = previewData.duplicates.length + previewData.zohoConflicts.length
+      const resolved = Object.keys(resolutions).length;
+      const allResolved = resolved >= total;
+
+      btn.disabled = !allResolved;
+      hint.textContent = allResolved
+        ? ''
+        : `Resolve all ${total} potential duplicate(s) above before importing (${resolved}/${total} done).`;
+    }
+
+    async function runConfirm() {
+      const btn = document.getElementById('btn-confirm');
+      const statusEl = document.getElementById('import-status');
+
+      btn.disabled = true;
+      statusEl.style.display = 'block';
+      statusEl.className = 'status-info';
+      statusEl.textContent = 'Importing into Zoho CRM… this may take a moment.';
+
+      try {
+        const res = await fetch('/api/import/confirm', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ importId: previewData.importId, resolutions }),
+        });
+        const json = await res.json();
+        if (!json.ok) throw new Error(json.error);
+
+        const { contacts, contracts } = json.results;
+        const tbody = document.getElementById('result-tbody');
+        tbody.innerHTML = `
+          <tr>
+            <td>Contacts</td>
+            <td>${contacts.created}</td>
+            <td>${contacts.updated}</td>
+            <td>${contacts.failed.length}</td>
+          </tr>
+          <tr>
+            <td>Contracts</td>
+            <td>${contracts.created}</td>
+            <td>${contracts.updated}</td>
+            <td>${contracts.failed.length}</td>
+          </tr>
+        `;
+
+        const allFailed = [...contacts.failed, ...contracts.failed];
+        const failedDiv = document.getElementById('failed-list');
+        failedDiv.innerHTML = allFailed.length > 0
+          ? '<strong style="color:#dc2626;">Failed records:</strong><ul style="margin-top:0.5rem; font-size:0.85rem; color:#6b7280;">' +
+          allFailed.map(f => `<li>${f.kundennummer || f.vertragsnummer}: ${f.error}</li>`).join('') +
+          '</ul>'
+          : '';
+
+        document.getElementById('preview-results').style.display = 'none';
+        document.getElementById('result-summary').style.display = 'block';
+      } catch (e) {
+        statusEl.className = 'status-error';
+        statusEl.textContent = 'Import failed: ' + e.message;
+        btn.disabled = false;
+      }
+    }
+
+    function resetImport() {
+      uploadedFiles = [];
+      previewData = null;
+      resolutions = {};
+      document.getElementById('file-list').innerHTML = '';
+      document.getElementById('preview-results').style.display = 'none';
+      document.getElementById('result-summary').style.display = 'none';
+      document.getElementById('import-status').style.display = 'none';
+      updatePreviewButtonState();
+    }
+
+    let _allContracts = [];
+    let _filteredContracts = [];
+    let currentPage = 1;
+    let pageSize = 10;
+
+    async function loadContracts() {
+      const loading = document.getElementById('console-loading');
+      const errEl = document.getElementById('console-error');
+      const table = document.getElementById('console-table');
+
+      loading.style.display = 'block';
+      table.style.display = 'none';
+      errEl.style.display = 'none';
+
+      try {
+        const res = await fetch('/api/contracts');
+        const json = await res.json();
+        if (!json.ok) throw new Error(json.error);
+
+        _allContracts = json.contracts;
+        populateBrokerFilter(_allContracts);
+        applyFilters();
+        loading.style.display = 'none';
+        table.style.display = 'table';
+      } catch (e) {
+        loading.style.display = 'none';
+        errEl.style.display = 'block';
+        errEl.textContent = 'Failed to load contracts: ' + e.message;
+      }
+    }
+
+    function populateBrokerFilter(contracts) {
+      const sel = document.getElementById('filter-broker');
+      const brokers = [...new Set(contracts.map(c => c.broker).filter(Boolean))].sort();
+      sel.innerHTML = '<option value="">All Brokers</option>';
+      brokers.forEach(b => {
+        const o = document.createElement('option');
+        o.value = b; o.textContent = b;
+        sel.appendChild(o);
+      });
+    }
+
+    function applyFilters() {
+      const broker = document.getElementById('filter-broker').value;
+      const days = parseInt(document.getElementById('filter-expiry').value) || null;
+
+      _filteredContracts = _allContracts.filter(c => {
+        if (broker && c.broker !== broker) return false;
+        if (days !== null && (c.daysLeft === null || c.daysLeft > days)) return false;
+        return true;
+      });
+
+      currentPage = 1;
+      renderPage();
+    }
+
+    function refilterKeepPage() {
+      const broker = document.getElementById('filter-broker').value;
+      const days = parseInt(document.getElementById('filter-expiry').value) || null;
+
+      _filteredContracts = _allContracts.filter(c => {
+        if (broker && c.broker !== broker) return false;
+        if (days !== null && (c.daysLeft === null || c.daysLeft > days)) return false;
+        return true;
+      });
+      renderPage();
+    }
+
+    function onPageSizeChange() {
+      pageSize = parseInt(document.getElementById('filter-pagesize').value) || 20;
+      currentPage = 1;
+      renderPage();
+    }
+
+    function goToPage(page) {
+      const totalPages = Math.max(1, Math.ceil(_filteredContracts.length / pageSize));
+      if (page < 1 || page > totalPages) return;
+      currentPage = page;
+      renderPage();
+    }
+
+    function renderPage() {
+      const totalPages = Math.max(1, Math.ceil(_filteredContracts.length / pageSize));
+      currentPage = Math.min(currentPage, totalPages);
+
+      const start = (currentPage - 1) * pageSize;
+      const pageItems = _filteredContracts.slice(start, start + pageSize);
+
+      renderTable(pageItems);
+
+      document.getElementById('console-count').textContent =
+        `${_filteredContracts.length} contract${_filteredContracts.length !== 1 ? 's' : ''}`;
+
+      const controls = document.getElementById('pagination-controls');
+      if (_filteredContracts.length === 0) {
+        controls.style.display = 'none';
+        return;
+      }
+      controls.style.display = 'flex';
+
+      const rangeStart = _filteredContracts.length === 0 ? 0 : start + 1;
+      const rangeEnd = Math.min(start + pageSize, _filteredContracts.length);
+      document.getElementById('pagination-summary').textContent =
+        `Showing ${rangeStart}–${rangeEnd} of ${_filteredContracts.length}`;
+      document.getElementById('pagination-pages').textContent = `Page ${currentPage} of ${totalPages}`;
+
+      document.getElementById('btn-prev-page').disabled = currentPage <= 1;
+      document.getElementById('btn-next-page').disabled = currentPage >= totalPages;
+    }
+
+    function urgencyClass(daysLeft, status) {
+      if (status === 'Gekündigt') return 'urgency-cancelled';
+      if (daysLeft === null) return '';
+      if (daysLeft <= 0) return 'urgency-expired';
+      if (daysLeft <= 30) return 'urgency-critical';
+      if (daysLeft <= 90) return 'urgency-high';
+      if (daysLeft <= 180) return 'urgency-medium';
+      return 'urgency-low';
+    }
+
+    function renderTable(contracts) {
+      const tbody = document.getElementById('console-tbody');
+      if (contracts.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="9" style="text-align:center; color:#6b7280; padding:2rem;">No contracts match the current filters.</td></tr>';
+        return;
+      }
+
+      tbody.innerHTML = contracts.map(c => {
+        const cls = urgencyClass(c.daysLeft, c.status);
+        const daysStr = c.daysLeft === null ? '—' : c.daysLeft <= 0 ? 'Expired' : `${c.daysLeft}d`;
+        const customerName = [c.contact.salutation, c.contact.firstName, c.contact.lastName]
+          .filter(Boolean).join(' ') || c.contact.name || '—';
+        const followupText = c.hasFollowup
+          ? '<span class="badge badge-info">Created</span>'
+          : '<span class="badge badge-warning">Not Created</span>';
+        const btnDisabled = c.hasFollowup ? 'disabled' : '';
+        const btnTitle = c.hasFollowup ? 'Follow-up already exists' : 'Create renewal follow-up task in Zoho';
+
+        return `
+          <tr class="contract-row ${cls}" data-id="${c.id}">
+            <td><code style="font-size:0.8rem;">${c.contractNumber || '—'}</code></td>
+            <td><strong>${customerName}</strong></td>
+            <td style="font-size:0.8rem; white-space:nowrap;">
+              ${c.contact.phone}<br>
+              <span style="color:#6b7280;">${c.contact.email}</span>
+            </td>
+            <td>${c.broker || '—'}</td>
+            <td style="white-space:nowrap;">${c.expiryDate || '—'}</td>
+            <td><span class="days-badge ${cls}">${daysStr}</span></td>
+            <td>${c.status || '—'}</td>
+            <td id="followup-status-${c.id}">${followupText}</td>
+            <td style="white-space:nowrap;">
+              <button
+                class="btn btn-secondary"
+                style="padding:0.35rem 0.7rem; font-size:0.8rem; margin-right:0.35rem;"
+                onclick="openEditModal('${c.id}')"
+              >Edit</button>
+              <button
+                class="btn btn-primary"
+                id="followup-btn-${c.id}"
+                style="padding:0.35rem 0.85rem; font-size:0.8rem;"
+                ${btnDisabled}
+                title="${btnTitle}"
+                onclick="createFollowup('${c.id}', this)"
+              >+ Follow-up</button>
+            </td>
+          </tr>`;
+      }).join('');
+    }
+
+    async function createFollowup(contractId, btn) {
+      btn.disabled = true;
+      btn.textContent = 'Creating…';
+
+      try {
+        const res = await fetch(`/api/contracts/${contractId}/followup`, { method: 'POST' });
+        const json = await res.json();
+        if (!json.ok) throw new Error(json.error);
+
+        document.getElementById(`followup-status-${contractId}`).innerHTML =
+          '<span class="badge badge-info">Created</span>';
+        btn.textContent = '✓ Done';
+
+        const contract = _allContracts.find(c => c.id === contractId);
+        if (contract) contract.hasFollowup = true;
+
+      } catch (e) {
+        alert('Failed to create follow-up: ' + e.message);
+        btn.disabled = false;
+        btn.textContent = '+ Follow-up';
+      }
+    }
+
+    let _editingContractId = null;
+
+    function openEditModal(contractId) {
+      const contract = _allContracts.find(c => c.id === contractId);
+      if (!contract) return;
+
+      _editingContractId = contractId;
+      document.getElementById('edit-product').value = contract.product || '';
+      document.getElementById('edit-insurer').value = contract.insurer || '';
+      document.getElementById('edit-start-date').value = contract.startDate || '';
+      document.getElementById('edit-expiry-date').value = contract.expiryDate || '';
+      document.getElementById('edit-premium').value = contract.annualPremium ?? '';
+      document.getElementById('edit-payment-method').value = contract.paymentMethod || '';
+      document.getElementById('edit-status').value = contract.status || '';
+      document.getElementById('edit-broker').value = contract.broker || '';
+
+      document.getElementById('edit-error').style.display = 'none';
+      document.getElementById('edit-modal-overlay').classList.add('open');
+    }
+
+    function closeEditModal() {
+      document.getElementById('edit-modal-overlay').classList.remove('open');
+      _editingContractId = null;
+    }
+
+    async function submitEdit() {
+      if (!_editingContractId) return;
+      const btn = document.getElementById('btn-save-edit');
+      const errEl = document.getElementById('edit-error');
+      errEl.style.display = 'none';
+      btn.disabled = true;
+      btn.textContent = 'Saving…';
+
+      const body = {
+        Product: document.getElementById('edit-product').value,
+        Insurer: document.getElementById('edit-insurer').value,
+        Start_Date: document.getElementById('edit-start-date').value,
+        Expiry_Date: document.getElementById('edit-expiry-date').value,
+        Annual_Premium: parseFloat(document.getElementById('edit-premium').value) || null,
+        Payment_Method: document.getElementById('edit-payment-method').value,
+        Contract_Status: document.getElementById('edit-status').value,
+        Broker: document.getElementById('edit-broker').value,
+      };
+
+      try {
+        const res = await fetch(`/api/contracts/${_editingContractId}`, {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(body),
+        });
+        const json = await res.json();
+        if (!json.ok) throw new Error(json.error);
+
+        const contract = _allContracts.find(c => c.id === _editingContractId);
+        if (contract) {
+          contract.product = body.Product;
+          contract.insurer = body.Insurer;
+          contract.startDate = body.Start_Date;
+          contract.expiryDate = body.Expiry_Date;
+          contract.annualPremium = body.Annual_Premium;
+          contract.paymentMethod = body.Payment_Method;
+          contract.status = body.Contract_Status;
+          contract.broker = body.Broker;
+
+          if (contract.expiryDate) {
+            const today = new Date();
+            today.setHours(0, 0, 0, 0);
+            contract.daysLeft = Math.ceil((new Date(contract.expiryDate) - today) / 86400000);
+          } else {
+            contract.daysLeft = null;
+          }
+        }
+
+        closeEditModal();
+        refilterKeepPage();
+      } catch (e) {
+        errEl.textContent = 'Save failed: ' + e.message;
+        errEl.style.display = 'block';
+      } finally {
+        btn.disabled = false;
+        btn.textContent = 'Save Changes';
+      }
+    }
+
+    async function bulkFollowup() {
+      const btn = document.getElementById('btn-bulk');
+      const status = document.getElementById('bulk-status');
+
+      const eligible = _allContracts.filter(c =>
+        !c.hasFollowup && c.daysLeft !== null && c.daysLeft >= 0 && c.daysLeft <= 30
+      );
+
+      if (eligible.length === 0) {
+        status.style.display = 'block';
+        status.className = 'status-info';
+        status.textContent = 'No contracts expiring within 30 days need a follow-up.';
+        setTimeout(() => { status.style.display = 'none'; }, 4000);
+        return;
+      }
+
+      if (!confirm(`Create follow-ups for ${eligible.length} contract(s) expiring within 30 days?`)) return;
+
+      btn.disabled = true;
+      status.style.display = 'block';
+      status.className = 'status-info';
+      status.textContent = `Creating follow-ups for ${eligible.length} contract(s)…`;
+
+      try {
+        const res = await fetch('/api/contracts/bulk-followup', { method: 'POST' });
+        const json = await res.json();
+        if (!json.ok) throw new Error(json.error);
+
+        const { created, skipped, failed } = json;
+
+        eligible.forEach(c => {
+          const statusEl = document.getElementById(`followup-status-${c.id}`);
+          const btnEl = document.getElementById(`followup-btn-${c.id}`);
+          if (statusEl) statusEl.innerHTML = '<span class="badge badge-info">Created</span>';
+          if (btnEl) { btnEl.disabled = true; btnEl.textContent = '✓ Done'; }
+          c.hasFollowup = true;
+        });
+
+        status.className = 'status-success';
+        status.textContent = `Done — ${created} follow-up(s) created, ${skipped} already existed${failed.length ? `, ${failed.length} failed` : ''}.`;
+      } catch (e) {
+        status.className = 'status-error';
+        status.textContent = 'Bulk follow-up failed: ' + e.message;
+      } finally {
+        btn.disabled = false;
+        setTimeout(() => { status.style.display = 'none'; }, 4000);
+      }
+    }
+  </script>
+
+  <div class="modal-overlay" id="edit-modal-overlay">
+    <div class="modal-box">
+      <h2>Edit Contract</h2>
+      <div class="form-row">
+        <label>Product</label>
+        <input type="text" id="edit-product">
+      </div>
+      <div class="form-row">
+        <label>Insurer</label>
+        <input type="text" id="edit-insurer">
+      </div>
+      <div class="form-row">
+        <label>Start Date</label>
+        <input type="date" id="edit-start-date">
+      </div>
+      <div class="form-row">
+        <label>Expiry Date</label>
+        <input type="date" id="edit-expiry-date">
+      </div>
+      <div class="form-row">
+        <label>Annual Premium</label>
+        <input type="number" step="0.01" id="edit-premium">
+      </div>
+      <div class="form-row">
+        <label>Payment Method</label>
+        <select id="edit-payment-method">
+          <option value="monatlich">monatlich</option>
+          <option value="vierteljährlich">vierteljährlich</option>
+          <option value="halbjährlich">halbjährlich</option>
+          <option value="jährlich">jährlich</option>
+        </select>
+      </div>
+      <div class="form-row">
+        <label>Status</label>
+        <select id="edit-status">
+          <option value="Aktiv">Aktiv</option>
+          <option value="Gekündigt">Gekündigt</option>
+          <option value="In Bearbeitung">In Bearbeitung</option>
+        </select>
+      </div>
+      <div class="form-row">
+        <label>Broker</label>
+        <input type="text" id="edit-broker">
+      </div>
+      <div id="edit-error"></div>
+      <div class="modal-actions">
+        <button class="btn btn-secondary" onclick="closeEditModal()">Cancel</button>
+        <button class="btn btn-primary" id="btn-save-edit" onclick="submitEdit()">Save Changes</button>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>
