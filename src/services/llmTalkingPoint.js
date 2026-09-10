@@ -54,7 +54,7 @@ Erinnerung: Die komplette Antwort muss auf Deutsch sein, ohne Ausnahme.`;
             contents: [{ parts: [{ text: prompt }] }],
             generationConfig: {
                 temperature: 0.6,
-                maxOutputTokens: 400,
+                maxOutputTokens: 800,
             },
         }),
     });
