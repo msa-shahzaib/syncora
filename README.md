@@ -247,6 +247,8 @@ src/
                          # POST /api/contracts/bulk-followup
   services/
     csvParser.js         # Parses, normalises, and validates both CSV files
+    importSessions.js    # Persists state between preview and confirm
+    llmTalkingPoint.js   # Generates a focused talking point through Gemini API
     duplicateDetector.js # Near-duplicate detection logic
     zohoImport.js        # Upserts contacts then contracts into Zoho
     zohoContracts.js     # Fetches contracts for console; creates follow-up Tasks
