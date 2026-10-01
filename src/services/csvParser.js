@@ -64,7 +64,7 @@ function parseContactsContent(raw, source) {
 
     if (!row['Email']) {
       warnings.push('Missing email address');
-      issues.push({ row: row.__line, source, kundennummer: id, severity: 'warning', message: 'Missing email — importing row without it' });
+      issues.push({ row: row.__line, source, kundennummer: id, severity: 'warning', message: 'Missing email, importing row without it.' });
     }
 
     if (row['Email']) {
@@ -84,9 +84,9 @@ function parseContactsContent(raw, source) {
     const dob = normaliseDate(rawDob);
     if (!dob) {
       warnings.push(`Unrecognised date format for Geburtsdatum: "${rawDob}"`);
-      issues.push({ row: row.__line, source, kundennummer: id, severity: 'warning', message: `Unrecognised Geburtsdatum format "${rawDob}" — field will be left blank` });
+      issues.push({ row: row.__line, source, kundtaennummer: id, severity: 'warning', message: `Unrecognised Geburtsdatum format "${rawDob}" — field will be left blank` });
     } else if (dob !== rawDob) {
-      issues.push({ row: row.__line, source, kundennummer: id, severity: 'info', message: `Geburtsdatum normalised from "${rawDob}" → "${dob}"` });
+      issues.push({ row: row.__line, source, kundennummer: id, severity: 'info', message: `Geburtsdatum normalised from "${rawDob}" → "${dob}".` });
     }
 
     parsed.push({
@@ -121,7 +121,7 @@ function parseContractsContent(raw, source, validKundennummern) {
     const warnings = [];
 
     if (seenVertragsnummer.has(vn)) {
-      issues.push({ row: row.__line, source, vertragsnummer: vn, severity: 'warning', message: `Duplicate Vertragsnummer in "${source}" — skipping duplicate row` });
+      issues.push({ row: row.__line, source, vertragsnummer: vn, severity: 'info', message: `Duplicate Vertragsnummer in "${source}", skipping duplicate row.` });
       continue;
     }
     seenVertragsnummer.add(vn);
@@ -131,8 +131,8 @@ function parseContractsContent(raw, source, validKundennummern) {
         row: row.__line,
         source,
         vertragsnummer: vn,
-        severity: 'error',
-        message: `Kundennummer ${row['Kundennummer']} not found in contacts — contract will be skipped`,
+        severity: 'warning',
+        message: `Kundennummer ${row['Kundennummer']} not found in contacts, contract will be skipped.`,
       });
       continue;
     }
@@ -154,11 +154,11 @@ function parseContractsContent(raw, source, validKundennummern) {
     }
 
     if (ablauf && ablauf < new Date().toISOString().slice(0, 10) && row['Status'] === 'Aktiv') {
-      issues.push({ row: row.__line, source, vertragsnummer: vn, severity: 'warning', message: `Contract expired (${ablauf}) but Status = Aktiv — importing as-is, flagged for review` });
+      issues.push({ row: row.__line, source, vertragsnummer: vn, severity: 'warning', message: `Contract has expired (${ablauf}) but Status is Aktiv, will be imported as is.` });
     }
 
     if (row['Status'] === 'Gekündigt') {
-      issues.push({ row: row.__line, source, vertragsnummer: vn, severity: 'info', message: `Status = Gekündigt (cancelled) — will import but exclude from renewal console` });
+      issues.push({ row: row.__line, source, vertragsnummer: vn, severity: 'warning', message: `Status is Gekündigt, will be imported as is.` });
     }
 
     const beitrag = normaliseAmount(row['Jahresbeitrag']);
