@@ -6,7 +6,7 @@
 [![Express](https://img.shields.io/badge/Express-5.x-000000?logo=express&logoColor=white)](https://expressjs.com)
 [![Zoho CRM](https://img.shields.io/badge/Zoho%20CRM-API%20v6-E42527?logo=zoho&logoColor=white)](https://www.zoho.com/crm/)
 
-**Live demo →** [zoho-contract-console-production.up.railway.app](https://zoho-contract-console-production.up.railway.app)
+**Live demo →** [syncora-production-d7e1.up.railway.app](https://syncora-production-d7e1.up.railway.app)
 
 ---
 
@@ -171,12 +171,3 @@ The app expects the following custom fields and modules in your Zoho CRM org:
 ```
 
 ---
-
-## How Idempotent Import Works
-
-Re-running the import never creates duplicate records. Before writing any record, the app calls `GET /crm/v6/{Module}/search` with a criteria filter on the external key field. If a match is found the existing record is **updated (PUT)**; otherwise a new one is **created (POST)**. This makes it safe to re-run after correcting a CSV or recovering from a partial failure.
-
----
-
-## Demo
-
