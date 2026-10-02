@@ -1,0 +1,30 @@
+Kundennummer;Anrede;Vorname;Nachname;Email;Telefon;Strasse;PLZ;Ort;Geburtsdatum;Makler
+K-1001;Herr;Andreas;Müller;a.mueller@example.de;+49 30 2847115;Kastanienallee 42;10435;Berlin;1978-04-12;Sabine Weiß
+K-1002;Frau;Katharina;Schäfer;k.schaefer@example.de;+49 40 5591203;Eppendorfer Weg 18;20259;Hamburg;1985-11-03;Thomas Krüger
+K-1003;Herr;Emre;Özdemir;e.oezdemir@example.de;+49 221 7734280;Venloer Straße 301;50823;Köln;1990-02-27;Aylin Öztürk
+K-1004;Herr;Manfred;Weiß;m.weiss@example.de;+49 89 41207755;Lindwurmstraße 88;80337;München;1964-07-19;Sabine Weiß
+K-1005;Frau;Brigitte;Köhler;b.koehler@example.de;+49 711 6620148;Hauptstätter Straße 57;70178;Stuttgart;1959-09-30;Michael Brandt
+K-1006;Frau;Fatma;Yilmaz;f.yilmaz@example.de;+49 69 27139604;Berger Straße 122;60316;Frankfurt am Main;1988-05-14;Aylin Öztürk
+K-1007;Herr;Lars;Hoffmann;l.hoffmann@example.de;+49 511 3348820;Limmerstraße 76;30451;Hannover;1982-12-08;Thomas Krüger
+K-1008;Frau;Sonja;Becker;s.becker@example.de;+49 351 8125537;Alaunstraße 63;01099;Dresden;1975-03-22;Sabine Weiß
+K-1009;Herr;Dietmar;Wagner;d.wagner@example.de;+49 231 5540912;Kaiserstraße 145;44135;Dortmund;1969-08-05;Michael Brandt
+K-1010;Frau;Petra;Schulz;p.schulz@example.de;+49 341 2298760;Karl-Liebknecht-Straße 91;04275;Leipzig;1980-01-17;Thomas Krüger
+K-1011;Herr;Nikolas;Braun;n.braun@example.de;+49 911 4436028;Fürther Straße 210;90429;Nürnberg;1993-06-11;Aylin Öztürk
+K-1012;Frau;Ingrid;Krüger;i.krueger@example.de;+49 421 7710394;Vor dem Steintor 48;28203;Bremen;1957-10-29;Michael Brandt
+K-1013;Herr;Tobias;Fischer;t.fischer@example.de;+49 201 6683451;Rüttenscheider Straße 74;45130;Essen;1991-04-03;Sabine Weiß
+K-1014;Frau;Claudia;Neumann;c.neumann@example.de;+49 621 3392087;Seckenheimer Straße 29;68165;Mannheim;1977-07-26;Thomas Krüger
+K-1015;Herr;Murat;Şahin;m.sahin@example.de;+49 761 5528013;Habsburgerstraße 116;79104;Freiburg;1986-09-09;Aylin Öztürk
+K-1016;Herr;Ralf;Zimmermann;r.zimmermann@example.de;+49 234 8817260;Bongardstraße 33;44787;Bochum;1972-11-15;Michael Brandt
+K-1017;Frau;Elena;Hartmann;;+49 561 4409183;Wilhelmshöher Allee 205;34119;Kassel;1984-02-06;Sabine Weiß
+K-1018;Herr;Bernd;Lange;b.lange@example.de;+49 391 7263540;Hegelstraße 19;39104;Magdeburg;1966-05-21;Thomas Krüger
+K-1019;Frau;Miriam;Vogel;m.vogel@example.de;+49 381 5580127;Doberaner Straße 84;18057;Rostock;1989-12-01;Aylin Öztürk
+K-1020;Herr;Werner;Schmitt;w.schmitt@example.de;+49 681 3317498;Mainzer Straße 62;66111;Saarbrücken;1961-06-18;Michael Brandt
+K-1021;Frau;Annika;Roth;a.roth@example.de;+49 271 4482036;Sandstraße 27;57072;Siegen;1994-08-24;Sabine Weiß
+K-1022;Herr;Sebastian;Keller;s.keller@example.de;+49 941 6690713;Maximilianstraße 51;93047;Regensburg;1983-03-07;Thomas Krüger
+K-1023;Frau;Doris;Frank;d.frank@example.de;+49 251 2237805;Hammer Straße 108;48153;Münster;1971-10-13;Aylin Öztürk
+K-1025;Herr;Kai;Berger;k.berger@example.de;+49 431 5573012;Holtenauer Straße 143;24118;Kiel;1979-01-30;Michael Brandt
+K-1026;Frau;Lisa;Günther;l.guenther@example.de;+49 361 8804261;Johannesstraße 96;99084;Erfurt;1996-07-05;Sabine Weiß
+K-1027;Herr;Markus;Lorenz;m.lorenz@example.de;+49 345 6612390;Große Ulrichstraße 41;06108;Halle;1974-04-28;Thomas Krüger
+K-1028;Frau;Sabine;Winkler;s.winkler@example.de;+49 531 3390174;Hamburger Straße 267;38114;Braunschweig;1968-11-20;Aylin Öztürk
+K-1029;Herr;Jonas;Albrecht;j.albrecht@example.de;+49 209 4471682;Bahnhofstraße 15;45879;Gelsenkirchen;1992-02-09;Michael Brandt
+K-1030;Frau;Nadine;Sommer;n.sommer@example.de;+49 202 5528340;Friedrich-Ebert-Straße 79;42103;Wuppertal;1987-05-31;Sabine Weiß

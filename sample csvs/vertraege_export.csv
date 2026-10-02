@@ -1,0 +1,54 @@
+Vertragsnummer;Kundennummer;Produkt;Versicherer;Beginn;Ablaufdatum;Jahresbeitrag;Zahlweise;Status;Makler
+VN-2021-0417;K-1001;Berufsunfähigkeit;Nürnberger;2021-05-01;2026-09-30;1284,00;jährlich;Aktiv;Sabine Weiß
+VN-2023-0881;K-1001;Private Haftpflicht;Gothaer;2023-03-01;2027-03-01;98,40;jährlich;Aktiv;Sabine Weiß
+VN-2019-1132;K-1002;Hausrat;Allianz;2019-10-15;2026-10-14;186,50;halbjährlich;Aktiv;Thomas Krüger
+VN-2022-0088;K-1003;KFZ Haftpflicht;HUK-Coburg;2022-11-01;2026-10-31;742,00;vierteljährlich;Aktiv;Aylin Öztürk
+VN-2024-0350;K-1003;Rechtsschutz;ARAG;2024-01-15;2027-01-14;312,75;jährlich;Aktiv;Aylin Öztürk
+VN-2020-0761;K-1004;Private Haftpflicht;Gothaer;2020-11-09;2026-11-08;98,40;jährlich;Aktiv;Sabine Weiß
+VN-2018-0290;K-1005;Risikoleben;Alte Leipziger;2018-11-23;2026-11-22;414,00;jährlich;Aktiv;Michael Brandt
+VN-2023-0512;K-1006;Rechtsschutz;ARAG;2023-12-02;2026-12-01;312,75;halbjährlich;Aktiv;Aylin Öztürk
+VN-2021-0938;K-1007;Berufsunfähigkeit;Swiss Life;2021-12-16;2026-12-15;1620,00;monatlich;Aktiv;Thomas Krüger
+VN-2020-1477;K-1008;Krankenzusatz;Barmenia;2020-12-16;15.12.2026;528,00;monatlich;Aktiv;Sabine Weiß
+VN-2022-0203;K-1009;Gebäudeversicherung;VHV;2022-01-01;2026-12-31;876,20;jährlich;Aktiv;Michael Brandt
+VN-2019-0655;K-1010;Unfallversicherung;Continentale;2019-01-10;2027-01-09;248,00;jährlich;Aktiv;Thomas Krüger
+VN-2021-1284;K-1011;KFZ Vollkasko;AXA;2021-01-21;2027-01-20;1108,00;vierteljährlich;Aktiv;Aylin Öztürk
+VN-2018-0733;K-1012;Rentenversicherung;Zurich;2018-02-04;2027-02-03;2400,00;jährlich;Aktiv;Michael Brandt
+VN-2023-0071;K-1013;Hausrat;Signal Iduna;2023-02-18;2027-02-17;204,90;jährlich;Aktiv;Sabine Weiß
+VN-2020-0994;K-1014;Berufsunfähigkeit;Nürnberger;2020-03-01;2027-02-28;1455,60;monatlich;Aktiv;Thomas Krüger
+VN-2022-0446;K-1015;Private Haftpflicht;HDI;2022-03-12;2027-03-11;112,00;jährlich;Aktiv;Aylin Öztürk
+VN-2019-1508;K-1016;Rechtsschutz;Roland;2019-03-26;2027-03-25;356,40;halbjährlich;Aktiv;Michael Brandt
+VN-2021-0329;K-1017;Krankenzusatz;Württembergische;2021-04-07;2027-04-06;672,00;monatlich;Aktiv;Sabine Weiß
+VN-2020-1163;K-1018;KFZ Haftpflicht;HUK-Coburg;2020-04-20;2027-04-19;689,50;vierteljährlich;Aktiv;Thomas Krüger
+VN-2023-0198;K-1019;Risikoleben;Allianz;2023-05-03;2027-05-02;398,00;jährlich;Aktiv;Aylin Öztürk
+VN-2018-0847;K-1020;Gebäudeversicherung;Gothaer;2018-05-17;2027-05-16;942,80;jährlich;Aktiv;Michael Brandt
+VN-2022-0617;K-1021;Unfallversicherung;Barmenia;2022-05-31;2027-05-30;276,00;jährlich;Aktiv;Sabine Weiß
+VN-2021-1055;K-1022;Berufsunfähigkeit;Swiss Life;2021-06-13;2027-06-12;1738,00;monatlich;Aktiv;Thomas Krüger
+VN-2019-0412;K-1023;Hausrat;VHV;2019-06-25;2027-06-24;168,30;jährlich;Aktiv;Aylin Öztürk
+VN-2020-0578;K-1025;Rentenversicherung;Alte Leipziger;2020-07-09;2027-07-08;3000,00;jährlich;Aktiv;Michael Brandt
+VN-2023-0355;K-1026;Private Haftpflicht;AXA;2023-07-22;2027-07-21;104,60;jährlich;Aktiv;Sabine Weiß
+VN-2021-0742;K-1027;KFZ Vollkasko;Zurich;2021-08-04;2027-08-03;1245,00;vierteljährlich;Aktiv;Thomas Krüger
+VN-2018-1209;K-1028;Krankenzusatz;Continentale;2018-08-18;2027-08-17;594,00;monatlich;Aktiv;Aylin Öztürk
+VN-2022-0863;K-1029;Rechtsschutz;ARAG;2022-09-02;2027-09-01;334,20;halbjährlich;Aktiv;Michael Brandt
+VN-2020-0231;K-1030;Risikoleben;HDI;2020-09-15;2027-09-14;442,00;jährlich;Aktiv;Sabine Weiß
+VN-2023-0509;K-1002;Berufsunfähigkeit;Nürnberger;2023-10-06;2027-10-05;1512,00;monatlich;Aktiv;Thomas Krüger
+VN-2019-0977;K-1005;Gebäudeversicherung;Signal Iduna;2019-11-20;2027-11-19;1024,00;jährlich;Aktiv;Aylin Öztürk
+VN-2021-0166;K-1007;Unfallversicherung;Württembergische;2021-01-13;2028-01-12;288,00;jährlich;Aktiv;Michael Brandt
+VN-2020-1390;K-1009;Hausrat;Allianz;2020-03-05;2028-03-04;192,00;jährlich;Aktiv;Sabine Weiß
+VN-2017-0623;K-1011;KFZ Haftpflicht;HUK-Coburg;2017-07-16;2026-07-15;658,00;vierteljährlich;Gekündigt;Thomas Krüger
+VN-2018-0455;K-1013;Hausrat;Gothaer;2018-08-23;2026-08-22;174,50;jährlich;Gekündigt;Aylin Öztürk
+VN-2022-0730;K-1015;Private Haftpflicht;VHV;2022-09-19;2026-09-18;96,00;jährlich;Aktiv;Michael Brandt
+VN-2021-0891;K-1016;Krankenzusatz;Barmenia;2021-10-03;2026-10-02;516,40;monatlich;In Bearbeitung;Sabine Weiß
+VN-2020-0344;K-1018;Berufsunfähigkeit;Swiss Life;2020-10-25;2026-10-24;1396,00;monatlich;Aktiv;Thomas Krüger
+VN-2023-0127;K-1019;Rechtsschutz;Roland;2023-11-16;2026-11-15;298,80;halbjährlich;Aktiv;Aylin Öztürk
+VN-2019-1044;K-1020;Rentenversicherung;Zurich;2019-12-09;2026-12-08;2160,00;jährlich;Aktiv;Michael Brandt
+VN-2021-0470;K-1022;KFZ Vollkasko;AXA;2021-02-01;2027-01-31;1064,00;vierteljährlich;Aktiv;Sabine Weiß
+VN-2022-0925;K-1024;Risikoleben;Alte Leipziger;2022-02-15;2027-02-14;376,00;jährlich;Aktiv;Thomas Krüger
+VN-2020-0688;K-1026;Gebäudeversicherung;HDI;2020-03-08;2027-03-07;888,00;jährlich;Aktiv;Aylin Öztürk
+VN-2018-0316;K-1027;Unfallversicherung;Continentale;2018-04-29;2027-04-28;264,00;jährlich;Aktiv;Michael Brandt
+VN-2023-0642;K-1028;Hausrat;Signal Iduna;2023-06-02;2027-06-01;198,70;jährlich;Aktiv;Sabine Weiß
+VN-2021-1177;K-1030;Berufsunfähigkeit;Nürnberger;2021-07-16;2027-07-15;1584,00;monatlich;Aktiv;Thomas Krüger
+VN-2020-0805;K-1099;Private Haftpflicht;Württembergische;2020-08-27;2027-08-26;108,20;jährlich;Aktiv;Aylin Öztürk
+VN-2019-0559;K-1012;Krankenzusatz;Barmenia;2019-10-12;2027-10-11;624,00;monatlich;Aktiv;Michael Brandt
+VN-2022-0384;K-1014;KFZ Haftpflicht;VHV;2022-12-04;2027-12-03;712,50;vierteljährlich;Aktiv;Sabine Weiß
+VN-2024-0733;K-1021;Zahnzusatz;Barmenia;2024-06-01;2025-05-31;348,00;monatlich;Aktiv;Sabine Weiß
+VN-2021-0417;K-1001;Berufsunfähigkeit;Nürnberger;2021-05-01;2026-09-30;1284,00;jährlich;Aktiv;Sabine Weiß

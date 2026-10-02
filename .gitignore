@@ -6,6 +6,3 @@ node_modules/
 
 # Logs
 *.log
-
-# CSV files
-*.csv
