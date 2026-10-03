@@ -78,7 +78,7 @@ ZOHO_CLIENT_ID=
 ZOHO_CLIENT_SECRET=
 ZOHO_REFRESH_TOKEN=
 ZOHO_API_BASE=https://www.zohoapis.com       # change region suffix if needed (.eu, .in, etc.)
-ZOHO_ACCOUNTS_URL=https://accounts.zoho.com  # must match same region as above
+ZOHO_ACCOUNTS_URL=https://accounts.zoho.com  # must match the same region as above
 
 # Zoho API names for your custom fields/modules
 ZOHO_CONTRACTS_MODULE=
@@ -90,7 +90,7 @@ ZOHO_TASK_TALKING_POINT_FIELD=
 
 # Google Gemini
 GEMINI_API_KEY=
-GEMINI_MODEL=gemini-1.5-flash
+GEMINI_MODEL=
 
 # Server
 PORT=3000
